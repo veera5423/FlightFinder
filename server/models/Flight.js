@@ -2,9 +2,9 @@
 import mongoose from 'mongoose';
 
 const flightSchema = new mongoose.Schema({
-  operator: {
+  operatorId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Operator',
+    ref: 'User', // ✅ refers to the user collection
     required: true
   },
   flightNumber: { type: String, required: true },
@@ -21,7 +21,32 @@ const flightSchema = new mongoose.Schema({
     default: 'economy'
   },
   totalSeats: { type: Number, required: true },
-  availableSeats: { type: Number, required: true },
+  availableSeats: {
+    type: Number,
+    required: true,
+    validate: {
+      validator: function(v) {
+        return v <= this.totalSeats;
+      },
+      message: 'Available seats cannot exceed total seats'
+    }
+  },
+  
 }, { timestamps: true });
 
 export default mongoose.model('Flight', flightSchema);
+
+
+// const flightSchema = new mongoose.Schema({
+//   operatorId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+//   airline: String,
+//   from: String,
+//   to: String,
+//   date: String,
+//   time: String,
+//   price: Number,
+//   seats: Number,
+//   class: String,
+// })
+
+// module.exports = mongoose.model('Flight', flightSchema)

@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import operatorRoutes from './routes/operatorRoutes.js';
+// import operatorRoutes from './routes/operatorRoutes.js';
 import flightRoutes from './routes/flightRoutes.js';
 import bookingRoutes from './routes/bookingRoutes.js';
 
@@ -29,10 +29,8 @@ app.get('/', (req, res) => {
 });
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
+mongoose.connect(process.env.MONGO_URI)
+
 .then(() => {
   console.log('MongoDB connected');
   app.listen(process.env.PORT || 5000, () => {
@@ -40,7 +38,12 @@ mongoose.connect(process.env.MONGO_URI, {
   });
 })
 .catch(err => console.log(err));
+
+mongoose.connection.once('open', () => {
+  console.log('✅ Connected to DB:', mongoose.connection.name)
+})
+
 app.use('/api/auth', authRoutes);
-app.use('/api/operators', operatorRoutes);
+// app.use('/api/operators', operatorRoutes);
 app.use('/api/flights', flightRoutes);
 app.use('/api/bookings', bookingRoutes);

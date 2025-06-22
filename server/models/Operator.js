@@ -16,3 +16,4 @@ const operatorSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 export default mongoose.model('Operator', operatorSchema);
+

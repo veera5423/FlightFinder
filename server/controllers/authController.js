@@ -11,8 +11,14 @@ return jwt.sign({id:user._id,role:user.role},process.env.JWT_SECRET,{expiresIn:'
 export const register=async(req,res)=>{
     try{
     const {name,email,password,role}=req.body;
-    const exists=User.findOne({email});
-    if(exists) return res.status(400).json({message:'Email already exists'});
+    console.log(name,email,password,role);
+    
+    
+    
+    const exists = await User.findOne({email});
+    console.log(exists);
+    
+    if(exists) return res.status(400).json({message:'Email already exists'},{sucess:false});
     const user =await User.create({name,email,password,role});
     const token=generateToken(user);
 

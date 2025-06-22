@@ -24,10 +24,9 @@ const userSchema= new mongoose.Schema({
         enum: ['user', 'admin', 'operator'],
         default:'user',
     },
-isVerified:{
-    type:Boolean,
-    default:false,
-}
+    status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' }
+
+
 },{ timestamps:true});
 
 // Hash password before save
