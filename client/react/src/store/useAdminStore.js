@@ -13,6 +13,8 @@ const useAdminStore = create((set) => ({
 
   fetchPendingOperators: async () => {
     const res = await API.get('/admin/operators/pending')
+    console.log("pendingOperatos",res.data);
+    
     set({ pendingOperators: res.data })
   },
   fetchOperators: async () => {
@@ -21,18 +23,23 @@ const useAdminStore = create((set) => ({
   },
 
   approveOperator: async (id) => {
-    await API.patch(`/admin/operators/${id}/approve`)
+    await API.put(`/admin/operators/${id}/approve`)
     alert('Approved ✅')
   },
 
   rejectOperator: async (id) => {
-    await API.patch(`/admin/operators/${id}/reject`)
+    await API.put(`/admin/operators/${id}/reject`)
     alert('Rejected ❌')
   },
-  fetchStats: async () => {
-    const res = await API.get('/admin/stats')
-    set({ stats: res.data })
+ fetchStats : async () => {
+    try {
+      const res = await API.get('/admin/stats', { withCredentials: true });
+      set({ stats: res.data });
+    } catch (err) {
+      console.error("Failed to fetch stats");
+    }
   },
+  
 }))
 
 export default useAdminStore

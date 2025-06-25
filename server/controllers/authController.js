@@ -24,8 +24,8 @@ export const register=async(req,res)=>{
 
     res.cookie('token',token,{
         httpOnly:true,
-        secure:true,
-        sameSite:"None",
+        secure:process.env.NODE_ENV === 'production', 
+        sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
     });
     res.status(201).json({
         id: user._id,
@@ -33,6 +33,7 @@ export const register=async(req,res)=>{
         email: user.email,
         role: user.role
       });
+      req.send(user)
     } catch (err) {
       res.status(500).json({ msg: err.message });
     }
@@ -53,8 +54,8 @@ export const login = async (req, res) => {
   
       res.cookie('token', token, {
         httpOnly: true,
-        secure: true,
-        sameSite: 'None',
+        secure:process.env.NODE_ENV === 'production', 
+        sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
       });
   
       res.status(200).json({

@@ -62,14 +62,14 @@ export const getAllFlights = async (req, res) => {
   };
   
 
-// Get flights by operator (protected)
+// Get flights by operator (protected) for admin optional
 export const getOperatorFlights = async (req, res) => {
   const operator = await Operator.findOne({ createdBy: req.user._id });
   const flights = await Flight.find({ operator: operator._id });
   res.json(flights);
 };
 
-// Update a flight
+// Update a flight for admin optional
 export const updateFlight = async (req, res) => {
   const flight = await Flight.findById(req.params.id);
   if (!flight) return res.status(404).json({ msg: 'Flight not found' });
@@ -85,17 +85,20 @@ export const updateFlight = async (req, res) => {
   res.json(flight);
 };
 
-// Delete a flight
+// Delete a flight for admin optional
 export const deleteFlight = async (req, res) => {
-  const flight = await Flight.findById(req.params.id);
-  if (!flight) return res.status(404).json({ msg: 'Flight not found' });
+  try {
+    const flight = await Flight.findById(req.params.id);
+    if (!flight) return res.status(404).json({ msg: 'Flight not found' });
 
-  const operator = await Operator.findOne({ createdBy: req.user._id });
+    const operator = await Operator.findOne({ createdBy: req.user._id });
+    if (!operator || flight.operator.toString() !== operator._id.toString()) {
+      return res.status(403).json({ msg: 'Unauthorized' });
+    }
 
-  if (!operator || flight.operator.toString() !== operator._id.toString()) {
-    return res.status(403).json({ msg: 'Unauthorized' });
+    await Flight.findByIdAndDelete(req.params.id);
+    res.json({ msg: 'Flight deleted' });
+  } catch (err) {
+    res.status(500).json({ msg: err.message });
   }
-
-  await flight.remove();
-  res.json({ msg: 'Flight deleted' });
 };

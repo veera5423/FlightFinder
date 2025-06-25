@@ -31,7 +31,7 @@ const Login = () => {
         <h2 className="text-2xl font-bold text-center text-orange-600">Login</h2>
         <input name="email" type="email" placeholder="Email" onChange={handleChange} className="input" required />
         <input name="password" type="password" placeholder="Password" onChange={handleChange} className="input" required />
-        <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded">Login</button>
+        <button type="submit" className="w-full bg-orange-500 text-white py-2 rounded cursor-pointer">Login</button>
       </form>
     </div>
   )

@@ -27,7 +27,7 @@ export const bookFlight = async (req, res) => {
       flight: flightId,
       seats,
       totalPrice,
-      paymentStatus: 'pending' // Will be updated after Stripe payment
+      paymentStatus:"paid" 
     });
 
     // Update available seats

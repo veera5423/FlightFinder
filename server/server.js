@@ -5,13 +5,15 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-// import operatorRoutes from './routes/operatorRoutes.js';
+import operatorRoutes from './routes/operatorRoutes.js';
 import flightRoutes from './routes/flightRoutes.js';
 import bookingRoutes from './routes/bookingRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
+import adminStatsRoutes from './routes/adminStats.js';
 
-
-
-
+// for deployement
+import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 
@@ -44,6 +46,9 @@ mongoose.connection.once('open', () => {
 })
 
 app.use('/api/auth', authRoutes);
-// app.use('/api/operators', operatorRoutes);
+app.use('/api/operators',operatorRoutes);
 app.use('/api/flights', flightRoutes);
 app.use('/api/bookings', bookingRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/admin', adminStatsRoutes);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
