@@ -58,7 +58,7 @@ FlightFinder is a full-stack flight booking web application built using the **ME
 
 ### 1. Clone the Repo
 
-git clone https://github.com/your-username/flightfinder.git
+git clone[https://github.com/veera5423/FlightFinder.git](https://github.com/veera5423/FlightFinder)
 cd flightfinder
 
 ### 2. Setup Backend
