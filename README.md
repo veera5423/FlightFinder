@@ -42,15 +42,15 @@ FlightFinder is a full-stack flight booking web application built using the **ME
 
 ## 📁 Folder Structure
 
-flightfinder/
-├── client/
-│ └── react/ # React frontend (Vite)
-├── server/ # Express backend
-│ ├── controllers/
-│ ├── models/
-│ ├── routes/
-│ ├── middleware/
-│ └── index.js
+-flightfinder/
+-├── client/
+-│ └── react/ # React frontend (Vite)
+-├── server/ # Express backend
+-│ ├── controllers/
+-│ ├── models/
+-│ ├── routes/
+-│ ├── middleware/
+-│ └── index.js
 
 ---
 
