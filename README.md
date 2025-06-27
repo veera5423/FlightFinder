@@ -1,4 +1,5 @@
-# ✈️ FlightFinder
+# ✈️ FlightFinder 
+[demo video](https://drive.google.com/file/d/1vH93o_h93l0ppoDYVVDfGm0UsCoOXeJh/view?usp=sharing)
 
 FlightFinder is a full-stack flight booking web application built using the **MERN stack** (MongoDB, Express, React, Node.js). Users can search for flights, select seats, make bookings, and simulate payments — all in one seamless interface.
 
