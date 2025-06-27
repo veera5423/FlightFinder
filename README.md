@@ -6,7 +6,7 @@ FlightFinder is a full-stack flight booking web application built using the **ME
 
 ## 🌐 Live Demo
 
-> 🚧 Deployment pending. Will be updated after hosting.
+> 🚧 Deployment pending. Will be updated after hosting.[demo video](https://drive.google.com/file/d/1vH93o_h93l0ppoDYVVDfGm0UsCoOXeJh/view?usp=sharing)
 
 ---
 
