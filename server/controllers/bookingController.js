@@ -42,9 +42,13 @@ export const bookFlight = async (req, res) => {
 
 // Get current user's bookings
 export const getMyBookings = async (req, res) => {
-  const bookings = await Booking.find({ user: req.user._id })
-    .populate('flight')
-    .sort({ createdAt: -1 });
+  try {
+    const bookings = await Booking.find({ user: req.user._id })
+      .populate('flight')
+      .sort({ createdAt: -1 });
 
-  res.json(bookings);
+    res.json(bookings);
+  } catch (err) {
+    res.status(500).json({ msg: err.message });
+  }
 };

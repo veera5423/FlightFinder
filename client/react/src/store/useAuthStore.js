@@ -17,16 +17,27 @@ const useAuthStore = create((set) => ({
 
   register: async (userData)=>{
     try{
-      const res=API.post("/auth/register",userData)
+      const res= await API.post("/auth/register",userData)
       const { name, token, role } = res.data;
       const user=name
       set({user,token,role})
-      alert("Registration sucessful ✅")
+      if(res.data.success== true){
+  alert("Registered Successfully ✅")
+  return
+      }
+      else{
+        alert("Registration failed due to internal server error❌. Try again later")
+      }
+      
+      console.log(res);
+      
      
       return { success: true, role }
 
     }
     catch(err){
+      
+      
       alert(err.response?.data?.message ||"registration failed")
       return { success: false } 
     }
